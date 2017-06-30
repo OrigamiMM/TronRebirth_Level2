@@ -9,7 +9,7 @@ public class TronObject {
 	int y;
 	int width;
 	int height;
-
+	boolean isAlive = true;
 	void update() {
 
 	}

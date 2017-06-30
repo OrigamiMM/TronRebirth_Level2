@@ -14,14 +14,17 @@ import org.omg.Messaging.SyncScopeHelper;
 public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	TronPanel() {
 		time = new Timer(1000 / 60, this);
+		// manager.addObject(Player1);
 		titleFont = new Font("Arial", Font.BOLD, 70);
 		textFont = new Font("Arial", Font.PLAIN, 30);
 	}
 
+	// ObjectManager manager = new ObjectManager();
 	Timer time;
 	Font titleFont;
 	Font textFont;
-	TronPlayer1 Player1 = new TronPlayer1(10, 10, 400, 400);
+	TronPlayer1 Player1 = new TronPlayer1(15, 15, 150, 400, 5);
+	TronPlayer2 Player2 = new TronPlayer2(15,15,350,400,5);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -36,11 +39,13 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		Player1.update();
+
 	}
 
 	void updateEndState() {
-
+		// manager.update();
+		Player1.update();
+		Player2.update();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -58,13 +63,15 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press Enter to Play", 275, 400);
 	}
 
-	void drawGameState(Graphics g) {
+	void drawEndState(Graphics g) {
 		g.setColor(Color.GRAY.darker());
 		g.fillRect(0, 0, 800, 800);
+		// manager.draw(g);
 		Player1.draw(g);
+		Player2.draw(g);
 	}
 
-	void drawEndState(Graphics g) {
+	void drawGameState(Graphics g) {
 		g.setColor(Color.GRAY.brighter());
 		g.fillRect(0, 0, 800, 800);
 
@@ -84,7 +91,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		repaint();
+		this.repaint();
 		if (CurrentState == MENU_STATE) {
 			updateMenuState();
 		} else if (CurrentState == GAME_STATE) {
@@ -99,32 +106,62 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("typed");
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Pressed");
-//		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//			CurrentState++;
-//			if(CurrentState>END_STATE){
-//				CurrentState = MENU_STATE;
-//			}
-//			if (CurrentState == END_STATE) {
-//				CurrentState = MENU_STATE;
-//			} else if (CurrentState == MENU_STATE) {
-//				CurrentState = GAME_STATE;
-//			} else if (CurrentState == GAME_STATE) {
-//				CurrentState = END_STATE;
-//			}
-//		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			CurrentState++;
+			if (CurrentState > END_STATE) {
+				CurrentState = MENU_STATE;
+			}
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			Player1.CD1 = Player1.left1;
+			System.out.println("left");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			Player1.CD1 = Player1.right1;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			Player1.CD1 = Player1.up1;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			Player1.CD1 = Player1.down1;
+
+			// if (CurrentState == END_STATE) {
+			// CurrentState = MENU_STATE;
+			// } else if (CurrentState == MENU_STATE) {
+			// CurrentState = GAME_STATE;
+			// } else if (CurrentState == GAME_STATE) {
+			// CurrentState = END_STATE;
+			// }
+			// }
+
+		}if (e.getKeyCode() == KeyEvent.VK_A) {
+			Player2.CD2 = Player2.left2;
+			System.out.println("left");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			Player2.CD2 = Player2.right2;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			Player2.CD2 = Player2.up2;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			Player2.CD2 = Player2.down2;
+		}
 		System.out.println(CurrentState);
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Released");
-		
+
 	}
 }
