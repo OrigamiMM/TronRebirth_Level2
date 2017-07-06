@@ -14,17 +14,18 @@ import org.omg.Messaging.SyncScopeHelper;
 public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	TronPanel() {
 		time = new Timer(1000 / 60, this);
-		// manager.addObject(Player1);
+		manager1.addObject(Player1);
+		manager2.addObject(Player2);
 		titleFont = new Font("Arial", Font.BOLD, 70);
 		textFont = new Font("Arial", Font.PLAIN, 30);
 	}
-
-	// ObjectManager manager = new ObjectManager();
+	ObjectManager manager1 = new ObjectManager();
+	ObjectManager manager2 = new ObjectManager();
 	Timer time;
 	Font titleFont;
 	Font textFont;
-	TronPlayer1 Player1 = new TronPlayer1(15, 15, 150, 400, 5);
-	TronPlayer2 Player2 = new TronPlayer2(15,15,350,400,5);
+	TronPlayer1 Player1 = new TronPlayer1(20, 20, 150, 400, 5);
+	TronPlayer2 Player2 = new TronPlayer2(20,20,350,400,5);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -32,6 +33,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 
 	void StartGame() {
 		time.start();
+		
 	}
 
 	void updateMenuState() {
@@ -43,9 +45,12 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateEndState() {
-		// manager.update();
-		Player1.update();
-		Player2.update();
+		manager1.update();
+		manager1.checkCollision();
+		manager2.update();
+		manager2.checkCollision();
+		//Player1.update();
+		//Player2.update();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -66,9 +71,14 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	void drawEndState(Graphics g) {
 		g.setColor(Color.GRAY.darker());
 		g.fillRect(0, 0, 800, 800);
-		// manager.draw(g);
-		Player1.draw(g);
-		Player2.draw(g);
+		g.setColor(Color.BLACK);
+		g.fillRect(25, 25, 750, 750);
+		manager1.draw(g);
+		manager2.draw(g);
+		manager1.addObject(new Trail(Player1.x+5, Player1.y+5, 10,10));
+		manager2.addObject(new Trail2(Player2.x+5, Player2.y+5, 10,10));
+		//Player1.draw(g);
+		//Player2.draw(g);
 	}
 
 	void drawGameState(Graphics g) {
@@ -121,7 +131,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			Player1.CD1 = Player1.left1;
-			System.out.println("left");
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			Player1.CD1 = Player1.right1;
@@ -143,7 +153,6 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 
 		}if (e.getKeyCode() == KeyEvent.VK_A) {
 			Player2.CD2 = Player2.left2;
-			System.out.println("left");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			Player2.CD2 = Player2.right2;

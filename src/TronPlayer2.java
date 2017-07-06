@@ -9,6 +9,7 @@ public class TronPlayer2 extends TronObject {
 	public int right2 = 4;
 	public int CD2 = down2;
 	TronPlayer2(int w1, int h1, int x1, int y1, int Spd) {
+		super();
 		x = x1;
 		y = y1;
 		width = w1;
@@ -18,6 +19,7 @@ public class TronPlayer2 extends TronObject {
 
 
 	void update() {
+		super.update();
 		if(CD2 == up2){
 			y-=Speed;
 		}if(CD2 == down2){

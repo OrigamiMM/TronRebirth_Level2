@@ -50,30 +50,31 @@ public class ObjectManager {
 //		}
 //	}
 //
-//	public void checkCollision() {
-//		for (int i = 0; i < objects.size(); i++) {
-//			for (int j = i + 1; j < objects.size(); j++) {
-//				GameObject o1 = objects.get(i);
-//				GameObject o2 = objects.get(j);
-//				
-//				if(o1.collisionBox.intersects(o2.collisionBox)){
-//					if((o1 instanceof Alien && o2 instanceof Projectile) ||
-//					   (o2 instanceof Alien && o1 instanceof Projectile)){
-//						score++;
-//						System.out.println(score);
-//						o1.isAlive = false;
-//						o2.isAlive = false;
-//					}
-//					else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
-//							(o2 instanceof Alien && o1 instanceof Rocketship)){
-//						o1.isAlive = false;
-//						o2.isAlive = false;
-//					}
-//	
-//				}
-//			}
-//		}
-//	}
+public void checkCollision() {
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
+				TronObject o1 = objects.get(i);
+				TronObject o2 = objects.get(j);
+				
+				if(o1.CollisionBox.intersects(o2.CollisionBox)){
+					if((o1 instanceof Trail && o2 instanceof Trail2) ||
+					   (o2 instanceof Trail && o1 instanceof Trail2)){
+						score++;
+						System.out.println(score);
+						o1.isAlive = false;
+						o2.isAlive = false;
+						System.out.println("intersect");
+					}
+					else if((o1 instanceof Trail && o2 instanceof Trail2) ||
+							(o2 instanceof Trail && o1 instanceof Trail2)){
+						o1.isAlive = false;
+						o2.isAlive = false;
+					}
+	
+				}
+			}
+		}
+	}
 	
 	public int getScore(){
 		return score;
