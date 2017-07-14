@@ -16,6 +16,5 @@ public class Trail2 extends TronObject{
 	void draw(Graphics g){
 		g.setColor(Color.ORANGE);
 		g.fillRect(x, y, width, height);
-		
 	}
 }

@@ -9,11 +9,12 @@ public class Trail extends TronObject{
 		width = w1;
 		height = h1;
 	}
+	
 	void update(){
 		super.update();
 	}
 	void draw(Graphics g){
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(x, y, width, height);
 		
 	}

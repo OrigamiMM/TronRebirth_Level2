@@ -22,6 +22,7 @@ public class TronPlayer1 extends TronObject {
 		super.update();
 		if(CD1 == up1){
 			y-=Speed;
+		
 		}if(CD1 == down1){
 			y+=Speed;
 		}if(CD1 == left1){
@@ -29,9 +30,22 @@ public class TronPlayer1 extends TronObject {
 		}if(CD1 == right1){
 			x+=Speed;
 		}
+		if(x<20){
+			x = 760;
+		}
+		if(x > 760){
+			x= 20;
+		}
+		if(y<20){
+			y=760;
+		}
+		if(y>760){
+			y=20;
+		}
 	}
 
 	void draw(Graphics g) {
+	
 		g.setColor(Color.CYAN);
 		g.fillRect(x, y, width, height);
 	}

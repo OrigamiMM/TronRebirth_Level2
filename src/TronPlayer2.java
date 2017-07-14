@@ -29,6 +29,18 @@ public class TronPlayer2 extends TronObject {
 		}if(CD2 == right2){
 			x+=Speed;
 		}
+		if(x<20){
+			x = 760;
+		}
+		if(x > 760){
+			x= 20;
+		}
+		if(y<20){
+			y=760;
+		}
+		if(y>760){
+			y=20;
+		}
 	}
 
 	void draw(Graphics g) {

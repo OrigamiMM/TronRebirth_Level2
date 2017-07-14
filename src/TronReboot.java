@@ -9,7 +9,7 @@ public class TronReboot {
 	}
 
 	final int width = 800;
-	final int height = 800;
+	final int height = 820;
 	TronPanel Jpan;
 	JFrame frame;
 
