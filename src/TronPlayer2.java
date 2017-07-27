@@ -7,7 +7,7 @@ public class TronPlayer2 extends TronObject {
 	public int down2 = 2;
 	public int left2 = 3;
 	public int right2 = 4;
-	public int CD2 = down2;
+	public int CD2 = left2;
 	TronPlayer2(int w1, int h1, int x1, int y1, int Spd) {
 		super();
 		x = x1;

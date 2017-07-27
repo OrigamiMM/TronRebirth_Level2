@@ -19,13 +19,17 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.BOLD, 70);
 		textFont = new Font("Arial", Font.PLAIN, 30);
 	}
+
 	ObjectManager manager1 = new ObjectManager();
 	ObjectManager manager2 = new ObjectManager();
 	Timer time;
+	int counter;
+	String Time;
 	Font titleFont;
 	Font textFont;
-	TronPlayer1 Player1 = new TronPlayer1(20, 20, 150, 400,5);
-	TronPlayer2 Player2 = new TronPlayer2(20,20,350,400,5);
+	int winner;
+	TronPlayer1 Player1 = new TronPlayer1(20, 20, 150, 400, 5);
+	TronPlayer2 Player2 = new TronPlayer2(20, 20, 650, 400, 5);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -33,7 +37,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 
 	void StartGame() {
 		time.start();
-		
+
 	}
 
 	void updateMenuState() {
@@ -45,12 +49,34 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateEndState() {
+		counter = counter+1;
+		System.out.println(counter);
 		manager1.update();
 		manager1.checkCollision();
 		manager2.update();
 		manager2.checkCollision();
-		//Player1.update();
-		//Player2.update();
+		if (Player1.isAlive == false) {
+			winner = 2;
+			CurrentState = GAME_STATE;
+			manager1.reset();
+			Player1 = new TronPlayer1(20, 20, 150, 400, 5);
+			manager1.addObject(Player1);
+			manager2.reset();
+			Player2 = new TronPlayer2(20, 20, 650, 400, 5);
+			manager2.addObject(Player2);
+		}
+		if (Player2.isAlive == false) {
+			winner= 1;
+			CurrentState = GAME_STATE;
+			manager1.reset();
+			Player1 = new TronPlayer1(20, 20, 150, 400, 5);
+			manager1.addObject(Player1);
+			manager2.reset();
+			Player2 = new TronPlayer2(20, 20, 650, 400, 5);
+			manager2.addObject(Player2);
+		}
+		// Player1.update();
+		// Player2.update();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -58,34 +84,68 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 800, 800);
 		g.setColor(Color.ORANGE);
 		g.setFont(titleFont);
-		g.drawString("TRON REBIRTH", 150, 300);
+		g.drawString("TRON REBIRTH", 125, 250);
 		g.setColor(Color.ORANGE.brighter());
-		g.drawString("TRON REBIRTH", 153, 304);
+		g.drawString("TRON REBIRTH", 128, 254);
 		g.setColor(Color.ORANGE.darker());
 		g.setFont(textFont);
-		g.drawString("v0.0.3", 715, 775);
-		g.setColor(Color.ORANGE);
+		g.drawString("v0.0.5", 715, 775);
+		g.drawString("Redone by Oscar", 500, 290);
+		g.setColor(Color.lightGray);
 		g.drawString("Press Enter to Play", 275, 400);
+		g.setColor(Color.ORANGE);
+		g.drawString("Player 2: Arrow Key Controls", 210, 500);
+		g.setColor(Color.CYAN);
+		g.drawString("Player 1: WASD Controls", 225, 450);
+		g.setColor(Color.GREEN);
+		g.drawString("Press R incase of freeze", 235, 550);
+		//g.drawRect(400, 0, 1, 800);
+		
 	}
 
 	void drawEndState(Graphics g) {
-		Trail trail1 = new Trail(Player1.x+5, Player1.y+20, 10,10);
-		Trail trail2 = new Trail(Player2.x+5, Player2.y+20, 10,10);
+		Trail trail1 = new Trail(Player1.x + 5, Player1.y + 5, 10, 10,1);
+		Trail trail2 = new Trail(Player2.x + 5, Player2.y + 5, 10, 10,2);
 		g.setColor(Color.GRAY.darker());
 		g.fillRect(0, 0, 800, 800);
 		g.setColor(Color.BLACK);
 		g.fillRect(25, 25, 750, 750);
+		g.setColor(Color.WHITE);
+		g.setFont(textFont);
 		manager1.draw(g);
 		manager2.draw(g);
-		manager1.addObject(trail1);
-		manager2.addObject(trail2);
-		//Player1.draw(g);
-		//Player2.draw(g);
+		manager1.addObject(trail2);
+		manager2.addObject(trail1);
+		// Player1.draw(g);
+		// Player2.draw(g);
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.GRAY.brighter());
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 800, 800);
+		g.setColor(Color.RED.darker());
+		g.setFont(titleFont);
+		g.drawString("GAME OVER", 170, 200);
+		g.setColor(Color.RED.brighter());
+		g.drawString("GAME OVER", 173, 203);
+		g.setColor(Color.GREEN);
+	    g.setFont(textFont);
+		g.drawString("Press Enter or R", 270, 350);
+		//g.drawRect(400, 0, 1, 800);
+		if (winner==1) {
+			g.setColor(Color.BLUE.darker());
+			g.setFont(titleFont);
+			g.drawString("PLAYER 1 WINS", 125, 500);
+			g.setColor(Color.BLUE.brighter());
+			g.drawString("PLAYER 1 WINS", 128, 504);
+		}
+		if (winner==2) {
+			g.setColor(Color.ORANGE.darker());
+			g.setFont(titleFont);
+			g.drawString("PLAYER 2 WINS", 125, 500);
+			g.setColor(Color.ORANGE.brighter());
+			g.drawString("PLAYER 2 WINS", 128, 504);
+		}
 
 	}
 
@@ -132,16 +192,16 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			Player1.CD1 = Player1.left1;
+			Player2.CD2 = Player2.left2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			Player1.CD1 = Player1.right1;
+			Player2.CD2 = Player2.right2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			Player1.CD1 = Player1.up1;
+			Player2.CD2 = Player2.up2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			Player1.CD1 = Player1.down1;
+			Player2.CD2 = Player2.down2;
 
 			// if (CurrentState == END_STATE) {
 			// CurrentState = MENU_STATE;
@@ -152,20 +212,29 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 			// }
 			// }
 
-		}if (e.getKeyCode() == KeyEvent.VK_A) {
-			Player2.CD2 = Player2.left2;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			Player1.CD1 = Player1.left1;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
-			Player2.CD2 = Player2.right2;
+			Player1.CD1 = Player1.right1;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W) {
-			Player2.CD2 = Player2.up2;
+			Player1.CD1 = Player1.up1;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			Player2.CD2 = Player2.down2;
+			Player1.CD1 = Player1.down1;
 		}
 		System.out.println(CurrentState);
-
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			CurrentState = END_STATE;
+			manager1.reset();
+			Player1 = new TronPlayer1(20, 20, 150, 400, 5);
+			manager1.addObject(Player1);
+			manager2.reset();
+			Player2 = new TronPlayer2(20, 20, 650, 400, 5);
+			manager2.addObject(Player2);
+		}
 	}
 
 	@Override
