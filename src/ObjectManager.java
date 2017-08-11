@@ -66,18 +66,14 @@ public class ObjectManager {
 					// }
 					if ((o1 instanceof Trail && o2 instanceof TronPlayer1) || (o2 instanceof Trail && o1 instanceof TronPlayer1)) {
 						o1.isAlive = false;
-					o2.isAlive = false;
+						o2.isAlive = false;
 					}
-					//if ((o1 instanceof Trail && o2 instanceof TronPlayer2) || (o2 instanceof Trail && o1 instanceof TronPlayer2)) {
-						//o1.isAlive = false;
-						//o2.isAlive = false;
-					//}
 				}
 			}
 		}
 	}
 
-	//}
+	// }
 
 	public int getScore() {
 		return score;

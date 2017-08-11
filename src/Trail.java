@@ -7,7 +7,7 @@ public int down = 1;
 public int up = 2;
 public int left = 3;
 public int right = 4;
-public int direct = right; 
+public int direct = up; 
 
 	Trail(int x1, int y1, int w1, int h1, int col) {
 		super();
@@ -20,7 +20,19 @@ public int direct = right;
 
 	void update() {
 		super.update();
-		
+		if(direct == up){
+			x= x;
+			y= y;
+		}if(direct == down){
+			x= x;
+			y= y-20;
+		}if(direct == left){
+			x= x+20;
+			y= y+20;
+		}if(direct == right){
+			x= x+5;
+			y= y+20;
+		}
 	}
 
 	void draw(Graphics g) {

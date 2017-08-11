@@ -105,10 +105,12 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
-	void drawEndState(Graphics g) {  
-		Trail trail1 = new Trail(Player1.x + 5, Player1.y + 20, 10, 10, 1);
-		Trail trail2 = new Trail(Player2.x + 5, Player2.y + 20, 10, 10, 2);
+	void drawEndState(Graphics g) {
+		Trail trail1 = new Trail(Player1.x+5, Player1.y+20, 10, 10, 1);
+		Trail trail2 = new Trail(Player2.x+5, Player2.y+20, 10, 10, 2);
 		manager1.addObject(trail1);
+		manager1.addObject(trail2);
+		manager2.addObject(trail1);
 		manager2.addObject(trail2);
 		g.setColor(Color.GRAY.darker());
 		g.fillRect(0, 0, 800, 800);
@@ -118,7 +120,17 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(textFont);
 		manager1.draw(g);
 		manager2.draw(g);
-
+if (Player1.CD1==Player1.up1) {
+	trail1.direct=trail1.up;
+}if (Player1.CD1==Player1.down1) {
+	trail1.direct=trail1.down;
+}if (Player1.CD1==Player1.left1) {
+	trail1.direct=trail1.left;
+}if (Player2.CD1==Player2.up1) {
+	trail2.direct=trail1.up;
+}if (Player2.CD1==Player2.down1) {
+	trail1.direct=trail1.down;
+}
 		// Player1.draw(g);
 		// Player2.draw(g);
 	}
@@ -196,6 +208,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			Player2.CD1 = Player2.left1;
+		
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			Player2.CD1 = Player2.right1;
@@ -206,16 +219,8 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			Player2.CD1 = Player2.down1;
-			// if (CurrentState == END_STATE) {
-			// CurrentState = MENU_STATE;
-			// } else if (CurrentState == MENU_STATE) {
-			// CurrentState = GAME_STATE;
-			// } else if (CurrentState == GAME_STATE) {
-			// CurrentState = END_STATE;
-			// }
-			// }
-
 		}
+		////
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			Player1.CD1 = Player1.left1;
 		}
