@@ -106,6 +106,8 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
+		x1= Player1.x+5;
+		y1=Player1.y+20;
 		Trail trail1 = new Trail(Player1.x+5, Player1.y+20, 10, 10, 1);
 		Trail trail2 = new Trail(Player2.x+5, Player2.y+20, 10, 10, 2);
 		manager1.addObject(trail1);
@@ -121,7 +123,8 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		manager1.draw(g);
 		manager2.draw(g);
 if (Player1.CD1==Player1.up1) {
-	trail1.direct=trail1.up;
+	x1= Player1.x+5
+	y1=Player1.x+5
 }if (Player1.CD1==Player1.down1) {
 	trail1.direct=trail1.down;
 }if (Player1.CD1==Player1.left1) {
