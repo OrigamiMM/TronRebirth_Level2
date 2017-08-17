@@ -20,28 +20,15 @@ public int direct = up;
 
 	void update() {
 		super.update();
-		if(direct == up){
-			x= x;
-			y= y;
-		}if(direct == down){
-			x= x;
-			y= y-20;
-		}if(direct == left){
-			x= x+20;
-			y= y+20;
-		}if(direct == right){
-			x= x+5;
-			y= y+20;
-		}
 	}
 
 	void draw(Graphics g) {
 
 		if (color == 1) {
-			g.setColor(Color.GREEN);
+			g.setColor(Color.CYAN.brighter());
 		}
 		if (color == 2) {
-			g.setColor(Color.WHITE);
+			g.setColor(Color.ORANGE.brighter());
 		}
 		g.fillRect(x, y, width, height);
 

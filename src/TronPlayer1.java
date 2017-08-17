@@ -31,27 +31,27 @@ public class TronPlayer1 extends TronObject {
 		}if(CD1 == right1){
 			x+=Speed;
 		}
-		if(x<20){
-			x = 760;
+		if(x<5){
+			x = 745;
 		}
-		if(x > 760){
-			x= 20;
+		if(x > 775){
+			x= 35;
 		}
-		if(y<20){
-			y=760;
+		if(y<5){
+			y=745;
 		}
-		if(y>760){
-			y=20;
+		if(y>775){
+			y=35;
 		}
 	}
 
 	void draw(Graphics g) {
 		if (color == 1) {
-			g.setColor(Color.CYAN.brighter());
+			g.setColor(Color.CYAN);
 		}
 		if (color == 2) {
 			g.setColor(Color.ORANGE);
 		}
-		g.fillRect(x, y, width, height);
+		g.fillOval(x, y, width, height);
 	}
 }
