@@ -19,7 +19,6 @@ public class TronPlayer1 extends TronObject {
 		color = col;
 	}
 
-
 	void update() {
 		super.update();
 		if(CD1 == up1){
@@ -31,17 +30,21 @@ public class TronPlayer1 extends TronObject {
 		}if(CD1 == right1){
 			x+=Speed;
 		}
-		if(x<5){
-			x = 745;
+		if(x<24){
+		isAlive = false;
+			
 		}
-		if(x > 775){
-			x= 35;
+		if(x > 760){
+			isAlive=false;
+
 		}
-		if(y<5){
-			y=745;
+		if(y<24){
+		isAlive = false;
+			
 		}
-		if(y>775){
-			y=35;
+		if(y>760){
+		isAlive = false;
+			
 		}
 	}
 

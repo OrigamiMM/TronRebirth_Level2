@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import org.omg.Messaging.SyncScopeHelper;
+import org.w3c.dom.css.Rect;
 
 public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	TronPanel() {
@@ -29,7 +30,6 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 	int winner;
 	TronPlayer1 Player1 = new TronPlayer1(20, 20, 150, 400, 5, 1);
 	TronPlayer1 Player2 = new TronPlayer1(20, 20, 650, 400, 5, 2);
-
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -50,27 +50,27 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateEndState() {
 		manager1.update();
-		 manager1.checkCollision();
+		manager1.checkCollision();
 		manager2.update();
-		 manager2.checkCollision();
+		manager2.checkCollision();
 		if (Player1.isAlive == false) {
 			winner = 2;
 			CurrentState = GAME_STATE;
 			manager1.reset();
-			Player1 = new TronPlayer1(20, 20, 150, 400, 5, 1);
+			Player1 = new TronPlayer1(20, 20, 150, 400, 4, 1);
 			manager1.addObject(Player1);
 			manager2.reset();
-			Player2 = new TronPlayer1(20, 20, 650, 400, 5, 2);
+			Player2 = new TronPlayer1(20, 20, 650, 400, 4, 2);
 			manager2.addObject(Player2);
 		}
 		if (Player2.isAlive == false) {
 			winner = 1;
 			CurrentState = GAME_STATE;
 			manager1.reset();
-			Player1 = new TronPlayer1(20, 20, 150, 400, 5, 1);
+			Player1 = new TronPlayer1(20, 20, 150, 400, 4, 1);
 			manager1.addObject(Player1);
 			manager2.reset();
-			Player2 = new TronPlayer1(20, 20, 650, 400, 5, 2);
+			Player2 = new TronPlayer1(20, 20, 650, 400, 4, 2);
 			manager2.addObject(Player2);
 		}
 	}
@@ -93,8 +93,6 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Player 2: Arrow Key Controls", 210, 500);
 		g.setColor(Color.CYAN);
 		g.drawString("Player 1: WASD Controls", 225, 450);
-		g.setColor(Color.GREEN);
-		g.drawString("Press R incase of freeze", 235, 550);
 
 	}
 
@@ -103,12 +101,12 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		int y1 = Player1.y + 20;
 		int x2 = Player2.x + 5;
 		int y2 = Player2.y + 20;
+
 		if (Player1.CD1 == Player1.up1) {
 			x1 = Player1.x + 5;
 			y1 = Player1.y + 20;
 		}
 		if (Player1.CD1 == Player1.down1) {
-
 			x1 = Player1.x + 5;
 			y1 = Player1.y - 10;
 		}
@@ -144,6 +142,7 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		manager2.addObject(trail2);
 		g.setColor(Color.GRAY.darker());
 		g.fillRect(0, 0, 800, 800);
+		g.clearRect(25, 25, 750, 750);
 		g.setColor(Color.BLACK);
 		g.fillRect(25, 25, 750, 750);
 		g.setColor(Color.WHITE);
@@ -252,10 +251,10 @@ public class TronPanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_R) {
 			CurrentState = END_STATE;
 			manager1.reset();
-			Player1 = new TronPlayer1(20, 20, 150, 400, 5, 1);
+			Player1 = new TronPlayer1(20, 20, 150, 400, 4, 1);
 			manager1.addObject(Player1);
 			manager2.reset();
-			Player2 = new TronPlayer1(20, 20, 650, 400, 5, 2);
+			Player2 = new TronPlayer1(20, 20, 650, 400, 4, 2);
 			manager2.addObject(Player2);
 		}
 	}
